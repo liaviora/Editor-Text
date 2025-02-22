@@ -23,6 +23,7 @@ Editor::Editor(QWidget *parent)
     connect(ui->actionitalic, &QAction::triggered, this, &Editor::setfontitalic);
     connect(ui->actionunderline, &QAction::triggered, this, &Editor::setfontunderline);
     connect(ui->actionabout, &QAction::triggered, this, &Editor::about);
+    connect(ui->actionprint, &QAction::triggered, this, &Editor::print);
 
     setWindowIcon(QIcon(":/rexallina/images/icon.png"));
 }
@@ -138,4 +139,13 @@ void Editor::about()
     QMessageBox::about(this, tr("About me"),
                        tr("Rexallina about Qt.\n"
                           "And test me about"));
+}
+
+void Editor::print()
+{
+    QPrinter printer;
+    QPrintDialog dialogprinter(&printer, this);
+    if (dialogprinter.exec() == QDialog::Rejected)
+        return;
+    ui->textedit->print(&printer);
 }

@@ -5,6 +5,8 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QFileDialog>
+#include <QPrinter>
+#include <QPrintDialog>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,6 +30,7 @@ private slots:
     void open();
     void about();
     void exit();
+    void print();
 
 private:
     QString currentfile;
