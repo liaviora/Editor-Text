@@ -73,6 +73,8 @@
     <addaction name="actionbold"/>
     <addaction name="actionunderline"/>
     <addaction name="actionitalic"/>
+    <addaction name="separator"/>
+    <addaction name="actionsearch"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -385,6 +387,14 @@
   <action name="actionExit_2">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionsearch">
+   <property name="text">
+    <string>Search</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::TextHeuristicRole</enum>
    </property>
   </action>
  </widget>

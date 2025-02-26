@@ -8,6 +8,13 @@
 #include <QPrinter>
 #include <QPrintDialog>
 
+// #include <QPushButton>
+// #include <QLineEdit>
+// #include <QHBoxLayout>
+// #include <QDialog>
+#include "dialogs.h"
+class Dialogs;
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Editor;
@@ -22,6 +29,8 @@ public:
     Editor(QWidget *parent = nullptr);
     ~Editor();
 
+    Dialogs *dialogs;
+
 private slots:
     bool maybesave();
     bool save();
@@ -31,6 +40,9 @@ private slots:
     void about();
     void exit();
     void print();
+    void searchText();
+    void previousText();
+    void dialogsStart();
 
 private:
     QString currentfile;

@@ -7,6 +7,7 @@ Editor::Editor(QWidget *parent)
 {
     ui->setupUi(this);
 
+    dialogs = new Dialogs(this);
     connect(ui->actionnew, &QAction::triggered, this, &Editor::newfile);
     connect(ui->actionopen, &QAction::triggered, this, &Editor::open);
     connect(ui->actionsave, &QAction::triggered, this, &Editor::save);
@@ -24,6 +25,10 @@ Editor::Editor(QWidget *parent)
     connect(ui->actionunderline, &QAction::triggered, this, &Editor::setfontunderline);
     connect(ui->actionabout, &QAction::triggered, this, &Editor::about);
     connect(ui->actionprint, &QAction::triggered, this, &Editor::print);
+    connect(ui->actionsearch, &QAction::triggered, this, &Editor::dialogsStart);
+
+    connect(dialogs->buttonsearch, &QPushButton::clicked, this, &Editor::searchText);
+    connect(dialogs->buttonprev, &QPushButton::clicked, this, &Editor::previousText);
 
     setWindowIcon(QIcon(":/rexallina/images/icon.png"));
 }
@@ -31,6 +36,21 @@ Editor::Editor(QWidget *parent)
 Editor::~Editor()
 {
     delete ui;
+}
+
+void Editor::dialogsStart()
+{
+    dialogs->show();
+}
+
+void Editor::previousText()
+{
+    ui->textedit->find(dialogs->lineedit->text(), QTextDocument::FindBackward | QTextDocument::FindCaseSensitively);
+}
+
+void Editor::searchText()
+{
+    ui->textedit->find(dialogs->lineedit->text(), QTextDocument::FindCaseSensitively);
 }
 
 void Editor::exit()

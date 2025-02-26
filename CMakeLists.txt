@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 project(Editor LANGUAGES CXX)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets PrintSupport)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Gui Core Widgets PrintSupport)
 
 qt_standard_project_setup()
 
@@ -12,6 +12,8 @@ qt_add_executable(Editor
     editor.h
     editor.ui
     editor.qrc
+    dialogs.h dialogs.cpp
+
 
 
 
@@ -45,6 +47,7 @@ qt_add_resources(Editor "editor"
 
 target_link_libraries(Editor
     PRIVATE
+        Qt::Gui
         Qt::Core
         Qt::Widgets
         Qt::PrintSupport
