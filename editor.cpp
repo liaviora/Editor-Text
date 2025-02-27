@@ -8,6 +8,16 @@ Editor::Editor(QWidget *parent)
     ui->setupUi(this);
 
     dialogs = new Dialogs(this);
+
+    QPalette palette = ui->textedit->palette();
+    palette.setColor(QPalette::Base, Qt::darkYellow);
+    palette.setColor(QPalette::Text, Qt::white);
+    ui->textedit->setPalette(palette);
+
+    QPalette palettes = this->palette();
+    palettes.setColor(QPalette::Window, Qt::white);
+    this->setPalette(palettes);;
+
     connect(ui->actionnew, &QAction::triggered, this, &Editor::newfile);
     connect(ui->actionopen, &QAction::triggered, this, &Editor::open);
     connect(ui->actionsave, &QAction::triggered, this, &Editor::save);
@@ -38,6 +48,16 @@ Editor::~Editor()
     delete ui;
 }
 
+void Editor::highlightSearch(const QString &text)
+{
+    ui->textedit->find(text, QTextDocument::FindCaseSensitively);
+}
+
+void Editor::highlightPrevious(const QString &text)
+{
+    ui->textedit->find(text, QTextDocument::FindBackward | QTextDocument::FindCaseSensitively);
+}
+
 void Editor::dialogsStart()
 {
     dialogs->show();
@@ -45,12 +65,18 @@ void Editor::dialogsStart()
 
 void Editor::previousText()
 {
-    ui->textedit->find(dialogs->lineedit->text(), QTextDocument::FindBackward | QTextDocument::FindCaseSensitively);
+    highlightPrevious(dialogs->lineedit->text());
 }
 
 void Editor::searchText()
 {
-    ui->textedit->find(dialogs->lineedit->text(), QTextDocument::FindCaseSensitively);
+    highlightSearch(dialogs->lineedit->text());
+    // QTextCursor cursor {ui->textedit->textCursor()};
+    // QTextCharFormat format;
+    // format.setBackground(Qt::red);
+    // QTextEdit::ExtraSelection selection {cursor, format};
+    // ui->textedit->setExtraSelections({selection});
+    // ui->textedit->setTextCursor(selection.cursor);
 }
 
 void Editor::exit()
@@ -157,8 +183,8 @@ void Editor::setfontitalic(bool italic)
 void Editor::about()
 {
     QMessageBox::about(this, tr("About me"),
-                       tr("Rexallina about Qt.\n"
-                          "And test me about"));
+                       tr("Hi, I'm Lovietanindi, I work in a bank in Japan,\n if you want we can be friends :)\n"
+                          "Info System\n") + QString("=============\n" + QSysInfo::productType() + QSysInfo::productVersion() + "\n" + QSysInfo::machineHostName() + "\n" + QSysInfo::currentCpuArchitecture()));
 }
 
 void Editor::print()

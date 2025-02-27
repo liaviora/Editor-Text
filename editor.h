@@ -7,11 +7,8 @@
 #include <QFileDialog>
 #include <QPrinter>
 #include <QPrintDialog>
-
-// #include <QPushButton>
-// #include <QLineEdit>
-// #include <QHBoxLayout>
-// #include <QDialog>
+#include <QPalette>
+#include <QSysInfo>
 #include "dialogs.h"
 class Dialogs;
 
@@ -51,6 +48,8 @@ private:
     void setfontbold(bool bold);
     void setfontitalic(bool italic);
     void setfontunderline(bool underline);
+    void highlightSearch(const QString &text);
+    void highlightPrevious(const QString &text);
     Ui::Editor *ui;
 };
 #endif // EDITOR_H

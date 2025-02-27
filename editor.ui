@@ -47,6 +47,9 @@
         <height>302</height>
        </size>
       </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::NoFrame</enum>
+      </property>
      </widget>
     </item>
    </layout>
